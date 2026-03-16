@@ -120,8 +120,8 @@ There are two ways to implement color segmentation:
 
 
 ```pytohn
+# Native method
 import cv2
-
 # 1. Cargamos la imagen
 img = cv2.imread(r'F:\AIROS CLUB\frutas.jpg')
 cv2.imshow('frutas.jpg', img)                    
@@ -138,6 +138,32 @@ cv2.imshow('Intensidad del Verde', g)
 cv2.imshow('Intensidad del Rojo', r)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+# NumPy slicing:
+# import cv2
+# 1. Load the image
+img = cv2.imread(r'F:\AIROS CLUB\frutas.jpg')
+cv2.imshow('Original Image', img)                    
+cv2.waitKey(0)
+
+# 2. Channel Splitting using Slicing
+# OpenCV uses BGR format: index 0 is Blue, 1 is Green, 2 is Red
+# Syntax: img[height, width, channel]
+blue_channel  = img[:, :, 0]
+green_channel = img[:, :, 1]
+red_channel   = img[:, :, 2]
+
+# Note: If you check blue_channel.shape, it will be (height, width) 
+# without the '3' because it is now a 2D grayscale intensity map.
+
+# 3. Display individual channel intensities
+cv2.imshow('Blue Intensity', blue_channel)
+cv2.imshow('Green Intensity', green_channel)
+cv2.imshow('Red Intensity', red_channel)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 ```
 ##END :fa-user:
 This concludes our introduction to using OpenCV for Python. We hope this text has served its purpose and is useful for improving your understanding of the library.
