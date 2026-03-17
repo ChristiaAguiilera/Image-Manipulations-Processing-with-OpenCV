@@ -58,7 +58,7 @@ import numpy as np
 
 #Upload image
 img = cv2.imread(r'F:\AIROS CLUB\imagen.jpg')
-alto, ancho = img.shape[:2] # Obtenemos dimensiones para las transformaciones
+alto, ancho = img.shape[:2] # We obtain dimensions for the transformations
 #display image in window
 cv2.imshow('imagen.jpg', img)
 cv2.waitKey(0) #It makes the window stay open 
@@ -81,10 +81,10 @@ cv2.waitKey(0)
 # PADDING (relleno)
 borde = cv2.copyMakeBorder(
     img,
-    50,   # arriba
-    50,   # abajo
-    50,   # izquierda
-    50,   # derecha
+    50,   # up
+    50, # down
+    50, # left
+    50, # right
     cv2.BORDER_CONSTANT,
     value=[0,0,0])
 cv2.imshow("Con borde", borde)
@@ -126,22 +126,23 @@ There are two ways to implement color segmentation:
 ```pytohn
 import cv2
 
-# 1. Cargamos la imagen
+# 1. Load the image
 img = cv2.imread(r'F:\AIROS CLUB\frutas.jpg')
-cv2.imshow('frutas.jpg', img)                    
+cv2.imshow('frutas.jpg', img)
 cv2.waitKey(0)
 
-# 2. Hacemos el Split (Recuerda: OpenCV usa BGR, no RGB)
+# 2. Split the image (Remember: OpenCV uses BGR, not RGB)
 b, g, r = cv2.split(img)
 
-# Si imprimes las dimensiones de uno de los canales, verás que ya no tiene el "3" al final
+# If you print the dimensions of one of the channels, you'll see that it no longer has the "3" at the end.
 
-# 3. Mostramos el canal azul (se verá en blanco y negro/escala de grises)
-cv2.imshow('Intensidad del Azul', b)
-cv2.imshow('Intensidad del Verde', g)
-cv2.imshow('Intensidad del Rojo', r)
+# 3. Display the blue channel (it will be displayed in black and white/grayscale)
+cv2.imshow('Blue Intensity', b)
+cv2.imshow('Green Intensity', g)
+cv2.imshow('Red Intensity', r)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
 
 # NumPy slicing:
 # import cv2
@@ -168,7 +169,7 @@ cv2.imshow('Red Intensity', red_channel)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-##END 
+##END ##
 
 This concludes our introduction to using OpenCV for Python. We hope this text has served its purpose and is useful for improving your understanding of the library.
 att: Christian Aguilera
