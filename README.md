@@ -168,7 +168,81 @@ cv2.imshow('Red Intensity', red_channel)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
 ```
+
+## Advanced Warping & Transforms
+
+### Affine Transformations
+These are mathematical operations that preserve parallel lines and the proportions of distances, although they may alter angles and lengths. In image processing.
+
+```python
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Load image
+img = cv2.imread(r'F:\AIROS CLUB\frutas.jpg')
+rows, cols, ch = img.shape
+
+# 2. Define 3 points on the original image (Reference triangle)
+# These points can be corners or centers of objects.
+
+pts1 = np.float32([[50, 50], [200, 50], [50, 200]])
+
+# 3. Define where these 3 points will be moved in the output image
+# Here we are "stretching" and "moving" the triangle.
+
+# pts2 = np.float32([[10, 100], [200, 50], [100, 250]])
+
+# 4. Obtain the Affine Transformation Matrix (2x3)
+# This function solves the system of equations internally.
+
+M = cv2.getAffineTransform(pts1, pts2)
+
+# 5. Apply the transformation
+# The third parameter is the output image size (width, height)
+dst = cv2.warpAffine(img, M, (cols, rows))
+
+# Display
+plt.subplot(121), plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)), plt.title('Original')
+plt.subplot(122), plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)), plt.title('Affine Transform')
+plt.show()
+```
+### Perspective Transformation
+If the Affine Transformation was like stretching a rubber sheet, the Perspective Transformation (or Homography) is like changing the angle from which you look at that sheet.
+Este método se basa en una matriz de 3 x 3 y se utiliza para simular cómo cambia la apariencia de un objeto según el punto de vista de la cámara. 
+
+```python
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Load image (Imagine a photo of a business card on a table)
+img = cv2.imread('business_card.jpg')
+rows, cols, ch = img.shape
+
+# 2. Locate the 4 corners in the original image (in pixels)
+# Points: Top-Left, Top-Right, Bottom-Left, Bottom-Right
+pts1 = np.float32([[56, 65], [368, 52], [28, 387], [389, 390]])
+
+# 3. Define where we want those corners to be in the final image
+# We want them to form a perfect rectangle of, for example, 300x400
+pts2 = np.float32([[0, 0], [300, 0], [0, 400], [300, 400]])
+
+# 4. Calculate the Perspective Matrix (3x3)
+M = cv2.getPerspectiveTransform(pts1, pts2)
+
+# 5. Apply the transformation (Warp Perspective)
+# We use warpPerspective instead of warpAffine
+dst = cv2.warpPerspective(img, M, (300, 400))
+
+# Visualization
+plt.subplot(121), plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)), plt.title('Original (Perspective)')
+plt.subplot(122), plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)), plt.title('Result (Flat)')
+plt.show()
+```
+
 ## END 
 
 This concludes our introduction to using OpenCV for Python. We hope this text has served its purpose and is useful for improving your understanding of the library.
