@@ -2,7 +2,7 @@
 
 This repository details the process for using OpenCV correctly with Python, which will help us process data using the OpenCV library. It describes the use of some functions according to their usage, with their respective parameters and codes.
 
-##Pixel arithmetic’s
+## Pixel arithmetic’s
 
 When we see a color image on a screen, our eyes perceive millions of colors. However, for OpenCV, a color image is nothing more than a three-layered sandwich of mathematical matrices. Each pixel in the image is formed by mixing the three primary colors of light: Red, Green, and Blue (RGB). "Channel decomposition" is literally separating that sandwich into its three individual slices.
 ```python 
@@ -46,7 +46,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 
-##Geometric Transformations 
+## Geometric Transformations 
 
 Antes de transformar, se debe entender que una imagen para la computadora es un plano cartesiano de píxeles. El origen (0,0) está en la esquina superior izquierda y cada transformación es, en esencia, mover un píxel de una coordenada (x, y) a una nueva coordenada (x', y'). Algunos tipos de transformaciones son  translation, rotation, resizing, flipping and cropping.
 La función **cv2.warpAffine()** es el motor principal en OpenCV para ejecutar estas transformaciones. Esta función recibe la imagen original y la matriz de transformación específica calculada previamente (por ejemplo, mediante **cv2.getRotationMatrix2D)**. Su trabajo es aplicar la multiplicación matricial a cada píxel de la imagen.
@@ -114,7 +114,7 @@ cv2.imshow('Resizing', resizing)
 cv2.waitKey(0)
 
 ```
-##Pixel Fundamentals & Color 
+## Pixel Fundamentals & Color 
 
 Each pixel in an image is made up of a mixture of three primary colors of light: Red, Green, and Blue (RGB). "Channel decomposition" is literally separating that sandwich into its three individual slices. While the entire tech world uses the RGB (Red, Green, Blue) format, OpenCV reads images in reverse: in BGR (Blue, Green, Red) format. This is due to a historical reason related to how older cameras delivered data. Therefore, when we decompose an image in OpenCV, the first channel we get is Blue, the second is Green, and the third is Red.
 
@@ -169,7 +169,7 @@ cv2.imshow('Red Intensity', red_channel)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-##END ##
+## END 
 
 This concludes our introduction to using OpenCV for Python. We hope this text has served its purpose and is useful for improving your understanding of the library.
 att: Christian Aguilera
